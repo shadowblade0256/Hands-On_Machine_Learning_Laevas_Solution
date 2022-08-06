@@ -1,0 +1,105 @@
+<p>abstract&nbsp; class&nbsp; CPU</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; abstract&nbsp; void&nbsp; show();</p>
+<p>}</p>
+<p></p>
+<p>abstract&nbsp; class&nbsp; RAM</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; int&nbsp; volume;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; int&nbsp; frequency;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; abstract&nbsp; void&nbsp; show();</p>
+<p>}</p>
+<p></p>
+<p>interface&nbsp; HardwareFactory</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; CPU&nbsp; getCPU();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; RAM&nbsp; getRAM();</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; PCCPU&nbsp; extends&nbsp; CPU</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo="PC&nbsp; x86&nbsp; CPU";</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; void&nbsp; show()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Model&nbsp; number:&nbsp; "+modelNo);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; MacCPU&nbsp; extends&nbsp; CPU</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo="Apple&nbsp; M1&nbsp; Max";</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; void&nbsp; show()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Model&nbsp; number:&nbsp; "+modelNo);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; PCRAM&nbsp; extends&nbsp; RAM</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo="PC&nbsp; x86&nbsp; RAM&nbsp; stick";</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; int&nbsp; volume=16;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; void&nbsp; show()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Model&nbsp; number:&nbsp; "+modelNo);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Volume:&nbsp; "+Integer.toString(volume)+"GB");</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; MacRAM&nbsp; extends&nbsp; RAM</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; String&nbsp; modelNo="Mac&nbsp; RAM";</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; int&nbsp; volume=32;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; void&nbsp; show()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Model&nbsp; number:&nbsp; "+modelNo);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Volume:&nbsp; "+Integer.toString(volume)+"GB");</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; PCFactory&nbsp; implements&nbsp; HardwareFactory</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; @Override</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; CPU&nbsp; getCPU()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return&nbsp; new&nbsp; PCCPU();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; @Override</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; RAM&nbsp; getRAM()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return&nbsp; new&nbsp; PCRAM();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>class&nbsp; AppleFactory&nbsp; implements&nbsp; HardwareFactory</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; @Override</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; CPU&nbsp; getCPU()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return&nbsp; new&nbsp; MacCPU();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; @Override</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; RAM&nbsp; getRAM()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return&nbsp; new&nbsp; MacRAM();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>
+<p></p>
+<p>public&nbsp; class&nbsp; HardwareTest</p>
+<p>{</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; public&nbsp; static&nbsp; void&nbsp; main(String[]&nbsp; args)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HardwareFactory&nbsp; pc,apple;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CPU&nbsp; cpu;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RAM&nbsp; ram;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pc=new&nbsp; PCFactory();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; apple=new&nbsp; AppleFactory();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cpu=pc.getCPU();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ram=apple.getRAM();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cpu.show();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ram.show();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>}</p>

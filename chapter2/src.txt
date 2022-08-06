@@ -1,0 +1,105 @@
+abstract class CPU
+{
+    String modelNo;
+    abstract void show();
+}
+
+abstract class RAM
+{
+    String modelNo;
+    int volume;
+    int frequency;
+    abstract void show();
+}
+
+interface HardwareFactory
+{
+    public CPU getCPU();
+    public RAM getRAM();
+}
+
+class PCCPU extends CPU
+{
+    String modelNo="PC x86 CPU";
+    void show()
+    {
+        System.out.println("Model number: "+modelNo);
+    }
+}
+
+class MacCPU extends CPU
+{
+    String modelNo="Apple M1 Max";
+    void show()
+    {
+        System.out.println("Model number: "+modelNo);
+    }
+}
+
+class PCRAM extends RAM
+{
+    String modelNo="PC x86 RAM stick";
+    int volume=16;
+    void show()
+    {
+        System.out.println("Model number: "+modelNo);
+        System.out.println("Volume: "+Integer.toString(volume)+"GB");
+    }
+}
+
+class MacRAM extends RAM
+{
+    String modelNo="Mac RAM";
+    int volume=32;
+    void show()
+    {
+        System.out.println("Model number: "+modelNo);
+        System.out.println("Volume: "+Integer.toString(volume)+"GB");
+    }
+}
+
+class PCFactory implements HardwareFactory
+{
+    @Override
+    public CPU getCPU()
+    {
+        return new PCCPU();
+    }
+
+    @Override
+    public RAM getRAM()
+    {
+        return new PCRAM();
+    }
+}
+
+class AppleFactory implements HardwareFactory
+{
+    @Override
+    public CPU getCPU()
+    {
+        return new MacCPU();
+    }
+
+    @Override
+    public RAM getRAM()
+    {
+        return new MacRAM();
+    }
+}
+
+public class HardwareTest
+{
+    public static void main(String[] args)
+    {
+        HardwareFactory pc,apple;
+        CPU cpu;
+        RAM ram;
+        pc=new PCFactory();
+        apple=new AppleFactory();
+        cpu=pc.getCPU();
+        ram=apple.getRAM();
+        cpu.show();
+        ram.show();
+    }
+}
